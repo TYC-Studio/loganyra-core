@@ -1,0 +1,61 @@
+spring:
+  application:
+    name: loganyra-core
+  hikari:
+    auto-commit: false
+    connection-timeout: 3000
+    validation-timeout: 2500
+    max-lifetime: 1800000
+    maximum-pool-size: 6
+    minimum-idle: 1
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: test
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production-mysql
+  datasource:
+    url: jdbc:${DB_MYSQL_URL:mysql://localhost:3306/loganyra?useSSL=true&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production-h2
+  datasource:
+    url: jdbc:h2:file:${DB_H2_PATH:./data/prod-db}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  h2:
+    console:
+      enabled: false
