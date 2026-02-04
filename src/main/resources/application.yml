@@ -48,7 +48,7 @@ spring:
     activate:
       on-profile: production-h2
   datasource:
-    url: jdbc:h2:file:${DB_H2_PATH:./data/prod-db}
+    url: jdbc:h2:file:${DB_H2_PATH:./data}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
     driver-class-name: org.h2.Driver
