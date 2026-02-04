@@ -1,13 +1,13 @@
 spring:
   application:
     name: loganyra-core
-  hikari:
-    auto-commit: false
-    connection-timeout: 3000
-    validation-timeout: 2500
-    max-lifetime: 1800000
-    maximum-pool-size: 6
-    minimum-idle: 1
+  datasource:
+    hikari:
+      auto-commit: false
+      maximum-pool-size: 6
+      minimum-idle: 1
+  profiles:
+    default: dev
 
 ---
 spring:
@@ -33,7 +33,7 @@ spring:
     activate:
       on-profile: production-mysql
   datasource:
-    url: jdbc:${DB_MYSQL_URL:mysql://localhost:3306/loganyra?useSSL=true&serverTimezone=UTC}
+    url: jdbc:${DB_MYSQL_URL:mysql://localhost:3306/loganyra?useSSL=true&serverTimezone=LOCAL}
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
     driver-class-name: com.mysql.cj.jdbc.Driver
