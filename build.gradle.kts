@@ -13,6 +13,10 @@ description = "loganyra-core"
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(21)
+        repositories {
+            // 修复windows上无法识别java工具链的bug
+            listOf("https://repo.gradle.org/gradle/java-toolchains/")
+        }
     }
 }
 
