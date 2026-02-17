@@ -16,21 +16,23 @@ import java.util.Arrays;
 @SpringBootApplication
 public class LoganyraApplication {
     private static final Logger LOG = LoggerFactory.getLogger(LoganyraApplication.class);
-
-    @Autowired
-    public Environment ENV;
+    public static final String VERSION = LoganyraApplication.class.getPackage().getImplementationVersion();
 
     @SuppressWarnings("deprecated")
     public static void main(String[] args) {
+        System.out.println("Welcome to Loganyra!");
         SpringApplication.run(LoganyraApplication.class, args);
     }
 
     @Component
     public class LoganyraApplicationRunner implements ApplicationRunner {
+        @Autowired
+        public Environment ENV;
+
         // 启动后立即执行
         @Override
         public void run(@NonNull ApplicationArguments args) {
-            LOG.info("Loganyra Core version %s starting in %s profile.".formatted(LoganyraApplication.class.getPackage().getImplementationVersion(), Arrays.toString(ENV.getActiveProfiles())));
+            LOG.info("Loganyra Core version %s starting in %s profile.".formatted(VERSION, Arrays.toString(ENV.getActiveProfiles())));
         }
     }
 }
