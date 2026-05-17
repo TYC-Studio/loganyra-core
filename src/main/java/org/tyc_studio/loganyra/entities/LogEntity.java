@@ -8,26 +8,31 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "logs")
 public class LogEntity {
-    public LogEntity() {
-    }
-
-    public LogEntity(String appName, String content) {
-        this.appName = appName;
-        this.content = content;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false, updatable = false)
     private Long id;
 
     @Column(nullable = false)
-    private String appName;
+    public String appName;
 
     @Column(nullable = false, columnDefinition = "LONGTEXT")
-    private String content;
+    public String content;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp()
     private LocalDateTime createdTime;
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDateTime getCreatedTime() {
+        return createdTime;
+    }
+
+    @Override
+    public String toString() {
+        return "{" + this.id + "--" + this.appName + ": " + this.content + "(" + this.getCreatedTime().toString() + ")}";
+    }
 }
