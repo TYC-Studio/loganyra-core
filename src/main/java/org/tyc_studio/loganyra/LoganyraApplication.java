@@ -10,15 +10,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Arrays;
 
 @SpringBootApplication
+@EnableTransactionManagement
 public class LoganyraApplication {
     private static final Logger LOG = LoggerFactory.getLogger(LoganyraApplication.class);
     public static final String VERSION = LoganyraApplication.class.getPackage().getImplementationVersion();
 
-    @SuppressWarnings("deprecated")
     public static void main(String[] args) {
         System.out.println("Welcome to Loganyra!");
         SpringApplication.run(LoganyraApplication.class, args);

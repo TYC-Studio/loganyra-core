@@ -13,8 +13,11 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class TestConnectionController {
+    @Autowired
+    public Environment env;
+
     @GetMapping("/test")
-    public Map<String,String> testConnection(@Autowired Environment env) {
+    public Map<String,String> testConnection() {
         return Map.of("status", "success", "version", LoganyraApplication.VERSION, "database_type", Arrays.asList(env.getActiveProfiles()).contains("mysql") ? "mysql" : "h2");
     }
 }

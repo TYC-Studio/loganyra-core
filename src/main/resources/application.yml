@@ -15,7 +15,7 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:h2:mem:testdb
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;MODE=MySQL;DATABASE_TO_LOWER=TRUE
     username: sa
     password:
     driver-class-name: org.h2.Driver
@@ -26,6 +26,12 @@ spring:
   h2:
     console:
       enabled: true
+  sql:
+    init:
+      mode: embedded
+      schema-locations: classpath:schema.sql
+      data-locations: classpath:data.sql
+      continue-on-error: false
 
 ---
 spring:
@@ -48,7 +54,7 @@ spring:
     activate:
       on-profile: production-h2
   datasource:
-    url: jdbc:h2:file:${DB_H2_PATH:./data}
+    url: jdbc:h2:file:${DB_H2_PATH:./data};DB_CLOSE_DELAY=-1;MODE=MySQL;DATABASE_TO_LOWER=TRUE
     username: ${DB_USERNAME:root}
     password: ${DB_PASSWORD:password}
     driver-class-name: org.h2.Driver
